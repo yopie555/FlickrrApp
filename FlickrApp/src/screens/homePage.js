@@ -1,9 +1,7 @@
 import React from 'react';
 import { Image, Text, View, StyleSheet } from 'react-native';
 
-import Header from '../components/Header';
-import Body from '../components/Body';
-import Footer from '../components/Footer';
+import ImageCard from '../components/ImageCard';
 
 const homePage = () => (
     <View style={styles.container}>
@@ -12,11 +10,11 @@ const homePage = () => (
                 source={{ uri: 'https://combo.staticflickr.com/pw/images/favicons/favicon-228.png' }}
                 style={styles.logo}
             />
+            <Text>
+                Flicker
+            </Text>
         </View>
-        <Text>homePage</Text>
-        <Header />
-        <Body />
-        <Footer />
+        <ImageCard />
     </View>
 );
 
@@ -27,6 +25,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     container1: {
+        flexDirection: 'row',
         width: '10%',
         borderBottomWidth: 1,
         borderBottomColor: '#FFFFFF',
@@ -35,9 +34,9 @@ const styles = StyleSheet.create({
     },
     logo: {
         margin: 5,
-        height: 40,
-        width: 40,
-        borderRadius: 20,
+        height: 30,
+        width: 30,
+        borderRadius: 8,
     }
 })
 export default homePage;
