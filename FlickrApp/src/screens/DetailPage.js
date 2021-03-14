@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { WebView } from 'react-native-webview'
 
-const DetailPage = ({
-    params,
-}) => (
-    <View>
-        <Text>DetailPage</Text>
-    </View>
-);
+const DetailPage = ({ route }) => {
+    return (
+        <WebView
+            source={{ uri: route.params.link }}
+        />
+    );
+}
 
 export default DetailPage;

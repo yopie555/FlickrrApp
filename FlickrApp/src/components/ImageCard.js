@@ -1,36 +1,50 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
-
-const Header = () => (
-    <View style={styles.container}>
-        <Image 
-            source={{ uri: 'https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1605068859/one-piece-roronoa-zoro-grin-678b5a11aa2ca2db330e3b05467e3a7f_600x400_n52fww.jpg'}}
-            style={styles.image}
-        />
-        <View style={styles.container2}>
-                <Icon2 name="account-circle" size={45} style={{color: '#FFFFFF'}} />
+const ImageCard = (props) => {
+    const navigation = useNavigation();
+    return (
+        <View style={styles.container1}>
+            <TouchableOpacity
+                onPress={() => props.navigation()}
+            >
+                <Image
+                    source={{ uri: props.image }}
+                    style={styles.image}
+                />
+            </TouchableOpacity>
+            <View style={styles.container2}>
+                <Icon2 name="account-circle" size={45} style={{ color: '#FFFFFF' }} />
                 <View style={styles.container3}>
                     <Text style={styles.text1}
                         ellipsizeMode="tail"
                         numberOfLines={2}
-                    >abang sesat</Text>
-                    <Text style={{color:'#ffffff'}}>Roronoa Zoro</Text>
+                    >{props.title}</Text>
+                    <Text style={styles.text2}>{props.author}</Text>
                 </View>
             </View>
-    </View>
-);
+        </View>
+    )
+}
+
+export default ImageCard
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        alignItems: 'center',
+    container1: {
+        marginBottom: 10,
     },
     image: {
-        margin:10,
-        height: 200,
-        width: '100%',
+        width: "100%",
+        height: null,
+        aspectRatio: 1.78,
     },
     container2: {
         flexDirection: 'row',
@@ -40,9 +54,12 @@ const styles = StyleSheet.create({
         marginLeft: 7,
     },
     text1: {
+        color: '#FFFFFF',
         fontSize: 22,
         width: 310,
-        color: '#ffffff'
+    },
+    text2: {
+        color: '#FFFFFF',
+        width: 310,
     },
 })
-export default Header;

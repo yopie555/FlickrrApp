@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Footer = () => (
+const FavPage = () => (
     <View>
-        <Text>Footer</Text>
+        <Text>FavPage</Text>
     </View>
 );
 
-export default Footer;
+export default FavPage;
