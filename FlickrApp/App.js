@@ -33,8 +33,14 @@ const RootHome = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'red',
+        showLabel: false,
+        activeTintColor: '#0063dc',
         inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: '#313131',
+          borderTopWidth: 1,
+          borderColor: 'white',
+        },
       }}
     >
       <Tab.Screen name="Home" component={HomePage} />
@@ -52,7 +58,7 @@ export default function App() {
           <Stack.Screen name="roothome" component={RootHome} />
           <Stack.Screen name="search" component={Search} />
           <Stack.Screen name="fav" component={Fav} />
-          <Stack.Screen name="detail" component={DetailPage}/>
+          <Stack.Screen name="detail" component={DetailPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

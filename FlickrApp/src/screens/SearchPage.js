@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MiniCard from '../components/MiniCard'
 import { searchImageAction } from '../action/searchAction'
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
     const [value, setValue] = useState(null)
     const dispatch = useDispatch();
     const searchImage = () => {
@@ -37,6 +37,7 @@ const SearchScreen = () => {
             </View>
             <FlatList
                 data={search.result}
+                keyExtractor={(item) => item.author_id}
                 renderItem={({ item }) => {
                     return (
                         <MiniCard
@@ -63,15 +64,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         elevation: 5,
-    },
-    txtsearch: {
-        margin: 5,
-        height: 30,
-        width: "80%",
-        fontSize: 16,
         backgroundColor: "#e6e6e6"
     },
+    txtsearch: {
+        flex: 1,
+        paddingHorizontal: 10,
+        // width: "90%",
+    },
     icon: {
-        color: '#FFFFFF'
+        margin: 5,
+        color: '#0063dc'
     }
 })

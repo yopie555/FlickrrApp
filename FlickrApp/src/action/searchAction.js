@@ -17,11 +17,11 @@ export const getSearchFailure = (error) => ({
 
 export const searchImageAction = (value) => {
   console.log('value', value);
-  
+
   return async (dispatch) => {
     try {
       dispatch(getSearchRequest());
-      const res = await axios.get(`http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=true&tag=${value}`);
+      const res = await axios.get(`https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=true&tag=${value}`);
       console.log('ini res search', res.data.items);
       dispatch(getSearchSuccess(res.data.items));
     } catch (error) {

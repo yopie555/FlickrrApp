@@ -3,7 +3,7 @@ import pictureReducer from './pictureReducer';
 import searchReducer from './searchReducer'
 
 const rootReducer = combineReducers({
-    picture:pictureReducer,
+    photo:pictureReducer,
     search:searchReducer,
 })
 

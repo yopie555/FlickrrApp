@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Text, View, StyleSheet, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPictureAction } from '../action/pictureAction'
+import { getPictureAction, favpic, savepic, delpic } from '../action/pictureAction'
 import ImageCard from '../components/ImageCard';
 
 const wait = (timeout) => {
@@ -15,20 +15,27 @@ const HomePage = ({ navigation }) => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
+
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const pictures = async () => {
-        await dispatch(getPictureAction())
-        setLoading(false)
+        await dispatch(getPictureAction()).then(() => setLoading(false));
     }
     useEffect(() => {
+        dispatch(savepic())
         pictures()
     }, [])
-    const picture = useSelector((state) => state.picture);
 
-    if(loading){
-        return(<ActivityIndicator color="#FFFFFF"/>)
+    const picture = useSelector((state) => state.photo);
+
+    if (loading == true) {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#0063dc" />
+            </View>
+        );
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.container1}>
@@ -54,15 +61,25 @@ const HomePage = ({ navigation }) => {
                             image={item.media.m}
                             title={item.title}
                             author={item.author}
+                            fav={() => dispatch(favpic(item))}
+                            del={() => dispatch(delpic(item))}
+                            picfav={picture.fav}
                             navigation={() => navigation.navigate('detail', { link: item.link })}
                         />
                     )
                 }}
+                keyExtractor={(item) => item.author_id}
             />
         </View>
     );
 }
 const styles = StyleSheet.create({
+    loading: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#313131',
+    },
     container: {
         flex: 1,
         backgroundColor: "#313131",
@@ -74,7 +91,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 8
+        paddingVertical: 8,
+        borderBottomColor: '#FFFFFF',
+        borderBottomWidth: 3
     },
     logo: {
         margin: 5,
